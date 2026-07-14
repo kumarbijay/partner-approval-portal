@@ -1,5 +1,7 @@
 # External Partner Onboarding & Approval Portal
 
+### 🔗 Live Demo: [https://partner-approval-portal.vercel.app/](https://partner-approval-portal.vercel.app/)
+
 A lightweight, premium web application built for the **Lead Product Manager (AI-Assisted Workflow)** screening assignment at **Dr. Reddy's**. 
 
 This system allows employees to initiate partner onboarding profiles, performs field validation, uses a local Large Language Model (LM Studio) for AI assistance, and enforces a compliance review state machine (Draft → Submitted → Under Review → Approved / Rejected → Deactivated) with full audit trails.

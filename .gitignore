@@ -1,0 +1,32 @@
+# Ignore compiled .NET binaries and build folders
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore SQLite database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Ignore Node.js packages and frontend builds
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific folders
+.vs/
+.idea/
+.vscode/
+
+# Ignore Gemini IDE local brain logs and configs
+.gemini/
+.agents/

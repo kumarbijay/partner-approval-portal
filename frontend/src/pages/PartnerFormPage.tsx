@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Partner } from '../mockData';
+import type { Partner } from '../mockData';
 
 interface PartnerFormPageProps {
   partnerId?: number; // If provided, we are editing
@@ -158,7 +158,7 @@ export const PartnerFormPage: React.FC<PartnerFormPageProps> = ({
     setAddressLog('');
 
     try {
-      let normalized: { Street: string; City: string; State: string; Country: string; ZipCode: string; IsAiNormalized?: boolean };
+      let normalized: any;
       if (mockMode) {
         const { mockApi } = await import('../mockData');
         normalized = await mockApi.normalizeAddress(address);
@@ -173,17 +173,18 @@ export const PartnerFormPage: React.FC<PartnerFormPageProps> = ({
         normalized = await res.json();
       }
 
+      // Map properties with fallbacks for both camelCase (API) and PascalCase (Mock)
+      const street = normalized.street || normalized.Street || '';
+      const city = normalized.city || normalized.City || '';
+      const state = normalized.state || normalized.State || '';
+      const country = normalized.country || normalized.Country || '';
+      const zipCode = normalized.zipCode || normalized.ZipCode || '';
+
       // Reconstruct clean address
-      const formatted = [
-        normalized.Street,
-        normalized.City,
-        normalized.State,
-        normalized.Country,
-        normalized.ZipCode
-      ].filter(Boolean).join(', ');
+      const formatted = [street, city, state, country, zipCode].filter(Boolean).join(', ');
       
       setAddress(formatted);
-      setAddressLog(`Normalized using AI! Street: "${normalized.Street}", City: "${normalized.City}", ZIP: "${normalized.ZipCode}"`);
+      setAddressLog(`Normalized using AI! Street: "${street}", City: "${city}", ZIP: "${zipCode}"`);
     } catch (err) {
       alert("Address normalization failed. Please check your address format manually.");
     } finally {

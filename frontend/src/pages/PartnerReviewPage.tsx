@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Partner, ApprovalHistory, AuditLog } from '../mockData';
+import type { Partner, ApprovalHistory, AuditLog } from '../mockData';
 
 interface PartnerReviewPageProps {
   partnerId: number;

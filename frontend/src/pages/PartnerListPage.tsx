@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Partner } from '../mockData';
+import type { Partner } from '../mockData';
 
 interface PartnerListPageProps {
   partners: Partner[];

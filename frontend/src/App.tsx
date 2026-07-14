@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Partner, mockApi, initializeMockStorage } from './mockData';
+import type { Partner } from './mockData';
+import { mockApi, initializeMockStorage } from './mockData';
 import { PartnerListPage } from './pages/PartnerListPage';
 import { PartnerFormPage } from './pages/PartnerFormPage';
 import { PartnerReviewPage } from './pages/PartnerReviewPage';

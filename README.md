@@ -93,12 +93,20 @@ partner-approval-portal/
 
 ---
 
-### Step 3: Configure Local AI (Optional)
-If you wish to use LM Studio for real LLM generations:
-1. Open **LM Studio** and load the **Gemma 4B** (or similar) model.
-2. Enable the **Local Server** option in LM Studio (defaults to `http://localhost:1234`).
-3. If your LM Studio server port differs, update the endpoint in `backend/appsettings.json` under `AiSettings:LmStudioUrl`.
-4. *Note: If LM Studio is not running, the application will automatically fall back to static text-processing heuristics with zero configuration.*
+### Step 3: Configure Local AI with LM Studio
+
+The application integrates with **LM Studio** to perform local LLM-based category suggestions and address normalization, protecting data privacy.
+
+1. **Download LM Studio**: Install it from [lmstudio.ai](https://lmstudio.ai/) if you haven't already.
+2. **Download Gemma Model**: Search for **Gemma** (such as `gemma-2-2b-it` or `Gemma-2-9b-it`) and download a quantized GGUF version (we recommend Gemma 2B/4B/9B depending on your system RAM).
+3. **Start Local Inference Server**:
+   * Open the **Developer / Local Server** tab in LM Studio (the code icon on the left navigation bar).
+   * Select your downloaded **Gemma** model in the top model selection dropdown to load it.
+   * Verify the port is set to **`1234`** (our C# backend's default port configuration).
+   * Click **Start Server**.
+4. **Endpoint Integration**:
+   * The backend `AiService.cs` automatically sends requests to the OpenAI-compatible local server endpoint at `http://localhost:1234/v1/chat/completions`.
+   * *Graceful Degradation*: If the server is offline or fails to respond within **3 seconds**, the backend automatically triggers local keyword regex stubs to ensure a smooth reviewer experience without freezing the UI.
 
 ---
 

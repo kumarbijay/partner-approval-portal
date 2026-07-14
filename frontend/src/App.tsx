@@ -17,7 +17,6 @@ function App() {
 
   // Core Data States
   const [partners, setPartners] = useState<Partner[]>([]);
-  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useState({ status: '', query: '' });
 
   // Initialize localStorage if needed
@@ -27,7 +26,6 @@ function App() {
   }, [mockMode, searchParams]);
 
   const loadPartners = async () => {
-    setLoading(true);
     try {
       if (mockMode) {
         const list = await mockApi.getPartners(searchParams.status, searchParams.query);
@@ -47,8 +45,6 @@ function App() {
       // Fail-safe fallback to mock storage in case live API is not running
       const list = await mockApi.getPartners(searchParams.status, searchParams.query);
       setPartners(list);
-    } finally {
-      setLoading(false);
     }
   };
 
